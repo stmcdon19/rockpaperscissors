@@ -40,6 +40,22 @@
     //If playerChoice is equal to cpuChoice --> tie
     //Else if, look at whatBeatsIt object. If cpuChoice is the value for the playerChoice key --> player loses
     //Else, --> cpu loses
+    function playRound (computerPlay, playerSelection) {
+      cpuChoice = computerPlay();
+      playerChoice = playerSelection();
+      whatBeatsIt = {
+        rock: "paper",
+        paper: "scissors",
+        scissors: "rock"
+      };
+      if (cpuChoice === playerChoice) {
+        return `Computer chose: ${cpuChoice}. You chose: ${playerChoice}. It's a tie!`;
+      } else if (whatBeatsIt[playerChoice] === cpuChoice){
+        return `Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You lose! ${cpuChoice} beats ${playerChoice}!`;
+      } else {
+        return `Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You win! ${playerChoice} beats ${cpuChoice}!`;
+      }
+    }
 
 </script>
 </html>
