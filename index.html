@@ -12,7 +12,7 @@
   //Define Function computerPlay --> takes no parameters
     //Randomly select from Rock Paper or Scissors
     //Store computer's options and select one at random
-    function computerPlay() {
+  function computerPlay() {
     let choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * choices.length)];
   }
@@ -20,7 +20,19 @@
   //Define Function playerSelection
     //Take input from the user to select Rock Paper or Scissors
     //Make user input lowercase to ensure case insensitive
-
+    function playerSelection() {
+      let choices = ["rock", "paper", "scissors"];
+      var response;
+      let needAnswer = true;
+      while (needAnswer) {
+        response = prompt("Choose rock, paper, or scissors").toLowerCase();
+        if (choices.includes(response)) {
+          return response;
+        } else {
+          alert("Invalid selection, please choose again.")
+        }
+      }
+    }
   //Define Function playRound --> Takes parameters computerPlay and playerSelection
     //Call computerPlay and store in var cpuChoice
     //Call playerSelection and store in var playerChoice
