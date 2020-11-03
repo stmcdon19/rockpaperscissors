@@ -9,51 +9,87 @@
   
 </body>
 <script>
-  //Define Function computerPlay --> takes no parameters
-    //Randomly select from Rock Paper or Scissors
-    //Store computer's options and select one at random
-  function computerPlay() {
-    let choices = ["rock", "paper", "scissors"];
-    return choices[Math.floor(Math.random() * choices.length)];
-  }
+  //Define Function game that will wrap around all code so far
+  //Function will take the number of rounds to played as an arg
+  //Loop "rounds" number of times calling play round on each iteration
+  //Must define player and cpu score 
+  //Update and display after each round
+  //Once all rounds have completed announce the winner
+  function game(rounds){
+    scores = {
+      player: 0,
+      computer: 0
+    };
 
-  //Define Function playerSelection
-    //Take input from the user to select Rock Paper or Scissors
-    //Make user input lowercase to ensure case insensitive
-    function playerSelection() {
+    for (var i = 0; i < rounds; i++) {
+      const [message, result] = (playRound(computerPlay, playerSelection));
+      console.log(message);
+      if (result === 'win') {
+        scores["player"] += 1;
+      } else if (result === 'lose') {
+        scores["computer"] += 1;
+      }
+      console.log(scores);
+    }
+
+    if (scores["player"] === scores["computer"]) {
+      console.log("The game resulted in a tie!")
+    } else if (scores["player"] > scores["computer"]) {
+      console.log("You have won the game! Nice!")
+    } else {
+      console.log("You have lost the game! Try again next time :(")
+    }
+
+
+    //Start helper functions
+
+    //Define Function computerPlay --> takes no parameters
+      //Randomly select from Rock Paper or Scissors
+      //Store computer's options and select one at random
+    function computerPlay() {
       let choices = ["rock", "paper", "scissors"];
-      var response;
-      let needAnswer = true;
-      while (needAnswer) {
-        response = prompt("Choose rock, paper, or scissors").toLowerCase();
-        if (choices.includes(response)) {
-          return response;
-        } else {
-          alert("Invalid selection, please choose again.")
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    //Define Function playerSelection
+      //Take input from the user to select Rock Paper or Scissors
+      //Make user input lowercase to ensure case insensitive
+      function playerSelection() {
+        let choices = ["rock", "paper", "scissors"];
+        var response;
+        let needAnswer = true;
+        while (needAnswer) {
+          response = prompt("Choose rock, paper, or scissors").toLowerCase();
+          if (choices.includes(response)) {
+            return response;
+          } else {
+            alert("Invalid selection, please choose again.")
+          }
         }
       }
-    }
-  //Define Function playRound --> Takes parameters computerPlay and playerSelection
-    //Call computerPlay and store in var cpuChoice
-    //Call playerSelection and store in var playerChoice
-    //Define whatBeatsIt object that has rock, paper, and scissors as the keys and the option that beats it as the values
-    //If playerChoice is equal to cpuChoice --> tie
-    //Else if, look at whatBeatsIt object. If cpuChoice is the value for the playerChoice key --> player loses
-    //Else, --> cpu loses
-    function playRound (computerPlay, playerSelection) {
-      cpuChoice = computerPlay();
-      playerChoice = playerSelection();
-      whatBeatsIt = {
-        rock: "paper",
-        paper: "scissors",
-        scissors: "rock"
-      };
-      if (cpuChoice === playerChoice) {
-        return `Computer chose: ${cpuChoice}. You chose: ${playerChoice}. It's a tie!`;
-      } else if (whatBeatsIt[playerChoice] === cpuChoice){
-        return `Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You lose! ${cpuChoice} beats ${playerChoice}!`;
-      } else {
-        return `Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You win! ${playerChoice} beats ${cpuChoice}!`;
+
+    //Define Function playRound --> Takes parameters computerPlay and playerSelection
+      //Call computerPlay and store in var cpuChoice
+      //Call playerSelection and store in var playerChoice
+      //Define whatBeatsIt object that has rock, paper, and scissors as the keys and the option that beats it as the values
+      //If playerChoice is equal to cpuChoice --> tie
+      //Else if, look at whatBeatsIt object. If cpuChoice is the value for the playerChoice key --> player loses
+      //Else, --> cpu loses
+      function playRound (computerPlay, playerSelection) {
+        cpuChoice = computerPlay();
+        playerChoice = playerSelection();
+        whatBeatsIt = {
+          rock: "paper",
+          paper: "scissors",
+          scissors: "rock"
+        };
+        if (cpuChoice === playerChoice) {
+          return [`Computer chose: ${cpuChoice}. You chose: ${playerChoice}. It's a tie!`, 'tie'];
+        } else if (whatBeatsIt[playerChoice] === cpuChoice){
+          return [`Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You lose! ${cpuChoice} beats ${playerChoice}!`, 'lose'];
+        } else {
+          return [`Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You win! ${playerChoice} beats ${cpuChoice}!`, 'win'];
+        }
       }
     }
 
