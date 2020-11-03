@@ -11,6 +11,11 @@
 <script>
   //Define Function computerPlay --> takes no parameters
     //Randomly select from Rock Paper or Scissors
+    //Store computer's options and select one at random
+    function computerPlay() {
+    let choices = ["rock", "paper", "scissors"];
+    return choices[Math.floor(Math.random() * choices.length)];
+  }
 
   //Define Function playerSelection
     //Take input from the user to select Rock Paper or Scissors
