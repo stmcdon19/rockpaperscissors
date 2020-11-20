@@ -3,80 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>RockPaperScissors</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  
+  <header>
+    <h1>Rock Paper Scissors</h1>
+  </header>
+  <main>
+    <div id="messages">
+      <p id="current-msg">Make you choice! Rock, Paper, or Scissors?</p>
+    </div>
+    <div id="game-area">
+      <button class="choice" id="rock"><img src="rock.png" alt="">Rock</button>
+      <button class="choice" id="paper"><img src="paper.png" alt="">Paper</button>
+      <button class="choice" id="scissors"><img src="scissors.png" alt="">Scissors</button>
+    </div>
+    <div id="scoreboard">
+      <div class="player" id="human">
+        <p>Your Score: 0</p>
+      </div>
+      <div class="player" id="cpu">
+        <p>CPU Score: 0</p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <!-- Fist by Cristiano Zoucas from the Noun Project  -->
+    <!-- Hand by Cristiano Zoucas from the Noun Project -->
+    <!-- Scissors by Cristiano Zoucas from the Noun Project -->
+  </footer>
 </body>
-<script>
-  function game(rounds){
-    //Initialize scoreboard
-    scores = {
-      player: 0,
-      computer: 0
-    };
-
-    //Repeat rounds until reaching defined number
-    for (var i = 0; i < rounds; i++) {
-      const [message, result] = playRound();
-      console.log(message);
-      if (result === 'win') {
-        scores["player"] += 1;
-      } else if (result === 'lose') {
-        scores["computer"] += 1;
-      }
-      console.log(scores);
-    }
-
-    //Report final score
-    if (scores["player"] === scores["computer"]) {
-      console.log("The game resulted in a tie!")
-    } else if (scores["player"] > scores["computer"]) {
-      console.log("You have won the game! Nice!")
-    } else {
-      console.log("You have lost the game! Try again next time :(")
-    }
-
-    //Allows computer to select random choice
-    function computerPlay() {
-      let choices = ["rock", "paper", "scissors"];
-      return choices[Math.floor(Math.random() * choices.length)];
-    }
-
-    //Prompt user for choice and return choice
-    function playerSelection() {
-      let choices = ["rock", "paper", "scissors"];
-      var response;
-      let needAnswer = true;
-      while (needAnswer) {
-        response = prompt("Choose rock, paper, or scissors").toLowerCase();
-        if (choices.includes(response)) {
-          return response;
-        } else {
-          alert("Invalid selection, please choose again.")
-        }
-      }
-    }
-
-    //Play one round of game
-    function playRound () {
-      cpuChoice = computerPlay();
-      playerChoice = playerSelection();
-      whatBeatsIt = {
-        rock: "paper",
-        paper: "scissors",
-        scissors: "rock"
-      };
-      //Use whatBeatsIt object to decide the winner of the round. Return both a message and the result.
-      if (cpuChoice === playerChoice) {
-        return [`Computer chose: ${cpuChoice}. You chose: ${playerChoice}. It's a tie!`, 'tie'];
-      } else if (whatBeatsIt[playerChoice] === cpuChoice){
-        return [`Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You lose! ${cpuChoice} beats ${playerChoice}!`, 'lose'];
-      } else {
-        return [`Computer chose: ${cpuChoice}. You chose: ${playerChoice}. You win! ${playerChoice} beats ${cpuChoice}!`, 'win'];
-      }
-    }
-  }
-
-</script>
+<script src="script.js"></script>
 </html>
