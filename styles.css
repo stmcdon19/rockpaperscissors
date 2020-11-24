@@ -27,14 +27,8 @@ header {
   display: block;
   max-width: 200px;
   border-radius: 50%;
-  /* text-decoration: none; */
-  /* border: none; */
   outline: none;
 }
-
-/* #game-area button:focus {
-
-} */
 
 
 #game-area button img {
@@ -48,8 +42,10 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  /* border-style: solid;
-  border-width: 2px;
-  border-color: black; */
   flex-wrap: nowrap;
+}
+
+.not-chosen {
+  opacity: .1;
+  transition: opacity .5s;
 }

@@ -5,7 +5,6 @@ class Game {
     cpu: 0
   };
   userChoice;
-  // cpuChoice;
   rounds;
 
   //constructor
@@ -60,11 +59,12 @@ class Game {
 game = new Game(3);
 
 //Take a choice from the user using event handler
-const choiceButtons = document.querySelectorAll(".choice");
+const choiceButtons = document.querySelectorAll("#user-choices .choice");
 choiceButtons.forEach(el => {
   el.addEventListener('click', function() {
     let userChoice = this.id;
     let [cpuChoice, winner] = game.playRound(userChoice);
+    //Display results based on results of the game
     if (winner === 'tie') {
       setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. It's a tie, go again!`)
     } else if (winner === 'cpu'){
@@ -72,6 +72,13 @@ choiceButtons.forEach(el => {
     } else if (winner === 'user'){
       setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. You won! Congrats, have a cookie.`)
     }
+
+    // Add not-chosen style the buttons that were not chosen by the user
+    choiceButtons.forEach(el => {
+      if(el.id != userChoice){
+        el.classList.add("not-chosen");
+      };
+    });
     updateScoreboard();
   });
 });
