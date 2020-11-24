@@ -72,14 +72,20 @@ choiceButtons.forEach(el => {
     } else if (winner === 'user'){
       setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. You won! Congrats, have a cookie.`)
     }
+    updateScoreboard();
   });
 });
 
 
 function setMessage(message) {
   document.querySelector('#current-msg').textContent = message;
-}
+};
 
+function updateScoreboard() {
+  document.querySelector('#user-score p').textContent = `Your Score: ${game.score['user']}`;
+  document.querySelector('#cpu-score p').textContent = `CPU Score: ${game.score['cpu']}`;
+
+};
 
 //Overall Flow
 //User is prompted to choose r/p/s
