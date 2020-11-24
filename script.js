@@ -59,11 +59,14 @@ class Game {
 game = new Game(3);
 
 //Take a choice from the user using event handler
-const choiceButtons = document.querySelectorAll("#user-choices .choice");
-choiceButtons.forEach(el => {
+const userChoiceButtons = document.querySelectorAll("#user-choices .choice");
+const cpuChoiceButtons = document.querySelectorAll("#cpu-choices .choice");
+userChoiceButtons.forEach(el => {
   el.addEventListener('click', function() {
-    let userChoice = this.id;
+    let userId = this.id;
+    let userChoice = userId.slice(5);
     let [cpuChoice, winner] = game.playRound(userChoice);
+    let cpuId = `cpu-${cpuChoice}`;
     //Display results based on results of the game
     if (winner === 'tie') {
       setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. It's a tie, go again!`)
@@ -74,9 +77,18 @@ choiceButtons.forEach(el => {
     }
 
     // Add not-chosen style the buttons that were not chosen by the user
-    choiceButtons.forEach(el => {
-      if(el.id != userChoice){
+    userChoiceButtons.forEach(el => {
+      if(el.id != userId){
         el.classList.add("not-chosen");
+      };
+    });
+
+    //Add not-chosen style to buttons not selected by cpu
+    cpuChoiceButtons.forEach(el => {
+      if(el.id != cpuId){
+        el.classList.add("not-chosen");
+        // console.log(`el.id: ${el.id}`);
+        // console.log(`cpuChoice: ${cpuChoice}`);
       };
     });
     updateScoreboard();
