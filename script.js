@@ -63,10 +63,10 @@ const userChoiceButtons = document.querySelectorAll("#user-choices .choice");
 const cpuChoiceButtons = document.querySelectorAll("#cpu-choices .choice");
 userChoiceButtons.forEach(el => {
   el.addEventListener('click', function() {
-    let userId = this.id;
-    let userChoice = userId.slice(5);
+    let userChoiceId = this.id;
+    let userChoice = userChoiceId.slice(5);
     let [cpuChoice, winner] = game.playRound(userChoice);
-    let cpuId = `cpu-${cpuChoice}`;
+    let cpuChoiceId = `cpu-${cpuChoice}`;
     //Display results based on results of the game
     if (winner === 'tie') {
       setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. It's a tie, go again!`)
@@ -78,17 +78,15 @@ userChoiceButtons.forEach(el => {
 
     // Add not-chosen style the buttons that were not chosen by the user
     userChoiceButtons.forEach(el => {
-      if(el.id != userId){
+      if(el.id != userChoiceId){
         el.classList.add("not-chosen");
       };
     });
 
     //Add not-chosen style to buttons not selected by cpu
     cpuChoiceButtons.forEach(el => {
-      if(el.id != cpuId){
+      if(el.id != cpuChoiceId){
         el.classList.add("not-chosen");
-        // console.log(`el.id: ${el.id}`);
-        // console.log(`cpuChoice: ${cpuChoice}`);
       };
     });
     updateScoreboard();

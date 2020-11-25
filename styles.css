@@ -45,6 +45,10 @@ header {
   flex-wrap: nowrap;
 }
 
+#cpu-choices .choice img{
+  transform: scaleX(-1);
+} 
+
 .not-chosen {
   opacity: .1;
   transition: opacity .5s;
