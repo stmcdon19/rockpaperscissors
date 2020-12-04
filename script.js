@@ -58,6 +58,12 @@ class Game {
 //initialize game
 game = new Game(3);
 
+//Add event listener to play-again button -- used later
+document.querySelector("#play-again").addEventListener('click', function(){
+  resetGameArea();
+  togglePlayAgain();
+});
+
 //Take a choice from the user using event handler
 const userChoiceButtons = document.querySelectorAll("#user-choices .choice");
 const cpuChoiceButtons = document.querySelectorAll("#cpu-choices .choice");
@@ -67,33 +73,42 @@ userChoiceButtons.forEach(el => {
     let userChoice = userChoiceId.slice(5);
     let [cpuChoice, winner] = game.playRound(userChoice);
     let cpuChoiceId = `cpu-${cpuChoice}`;
+
     //Display results based on results of the game
     if (winner === 'tie') {
       setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. It's a tie, go again!`)
     } else if (winner === 'cpu'){
-      setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. You lost! Choose the right one next time.`)
+      setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. You lost!`)
     } else if (winner === 'user'){
-      setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. You won! Congrats, have a cookie.`)
+      setMessage(`You chose ${userChoice}. The CPU chose ${cpuChoice}. You won!`)
     }
 
-    // Add not-chosen style the buttons that were not chosen by the user
+    // Add not-chosen class to buttons that were not chosen by the user
     userChoiceButtons.forEach(el => {
       if(el.id != userChoiceId){
         el.classList.add("not-chosen");
       };
+      el.classList.add("deactivated");
     });
 
-    //Add not-chosen style to buttons not selected by cpu
+    //Add not-chosen class to buttons not selected by cpu
     cpuChoiceButtons.forEach(el => {
       if(el.id != cpuChoiceId){
         el.classList.add("not-chosen");
       };
     });
     updateScoreboard();
+    togglePlayAgain();
+
+
   });
 });
 
-
+// function addChoiceClass(player, className) {
+//   if (player === "user") {
+    
+//   }
+// }
 function setMessage(message) {
   document.querySelector('#current-msg').textContent = message;
 };
@@ -103,6 +118,22 @@ function updateScoreboard() {
   document.querySelector('#cpu-score p').textContent = `CPU Score: ${game.score['cpu']}`;
 
 };
+
+function togglePlayAgain() {
+  button = document.querySelector("#play-again");
+  button.classList.toggle("invisible");
+  button.classList.toggle("deactivated");
+}
+
+function resetGameArea() {
+  setMessage("Make you choice! Rock, Paper, or Scissors?");
+  const allChoiceButtons = document.querySelectorAll(".choice");
+  allChoiceButtons.forEach(el => {
+    el.classList.remove("not-chosen");
+    el.classList.remove("deactivated");
+  });
+};
+
 
 //Overall Flow
 //User is prompted to choose r/p/s

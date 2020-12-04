@@ -8,6 +8,7 @@ header {
   text-align: center;
 }
 
+
 #messages {
   text-align: center;
 }
@@ -20,7 +21,7 @@ header {
   border-width: 2px;
   border-color: black; */
   flex-wrap: nowrap;
-  margin: 250px 0;
+  /* margin: 250px 0; */
 }
 
 #game-area button {
@@ -45,6 +46,11 @@ header {
   flex-wrap: nowrap;
 }
 
+#play-again {
+  display: block;
+  margin: 0 auto;
+}
+
 #cpu-choices .choice img{
   transform: scaleX(-1);
 } 
@@ -52,4 +58,13 @@ header {
 .not-chosen {
   opacity: .1;
   transition: opacity .5s;
+}
+
+.deactivated {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.invisible {
+  opacity: 0;
 }
