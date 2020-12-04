@@ -5,20 +5,13 @@ class Game {
     cpu: 0
   };
   userChoice;
-  rounds;
 
   //constructor
   constructor(rounds){
     this.rounds = rounds;
   };
 
-  //getters
-
-
-  //setters
-
-
-  //methods
+  //methods -- Only for core game logic. DOM manip functions defined outside class
   makeCpuChoice(){
     let choices = ["rock", "paper", "scissors"];
     return choices[Math.floor(Math.random() * choices.length)];
@@ -39,6 +32,7 @@ class Game {
     };
   };
 
+  //Compares the User's choice with the CPU's choice and declares a winner
   playRound(userChoice){
     let cpuChoice = this.makeCpuChoice();
     let winner = this.chooseWinner(userChoice, cpuChoice);
@@ -52,8 +46,7 @@ class Game {
     console.log(this.score);
     return [cpuChoice, winner]
   };
-  playGame(rounds){};
-}
+};
 
 //initialize game
 game = new Game(3);
@@ -104,11 +97,7 @@ userChoiceButtons.forEach(el => {
   });
 });
 
-// function addChoiceClass(player, className) {
-//   if (player === "user") {
-    
-//   }
-// }
+//Helper functions
 function setMessage(message) {
   document.querySelector('#current-msg').textContent = message;
 };
@@ -126,19 +115,10 @@ function togglePlayAgain() {
 }
 
 function resetGameArea() {
-  setMessage("Make you choice! Rock, Paper, or Scissors?");
+  setMessage("Make your choice! Rock, Paper, or Scissors?");
   const allChoiceButtons = document.querySelectorAll(".choice");
   allChoiceButtons.forEach(el => {
     el.classList.remove("not-chosen");
     el.classList.remove("deactivated");
   });
 };
-
-
-//Overall Flow
-//User is prompted to choose r/p/s
-//User clicks a choice. Result is recorded
-//CPU makes a choice. Result is recorded
-//Compare choices and record winner.
-//Display to user: their choice, cpu choice, winner
-//Increment scoreboard 
